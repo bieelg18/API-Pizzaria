@@ -1,4 +1,4 @@
-package dev.bieelg18.Pizzaria.model.repository.usuario;
+package dev.bieelg18.Pizzaria.repository.usuario;
 
 import dev.bieelg18.Pizzaria.model.entity.usuario.Permissao;
 import dev.bieelg18.Pizzaria.model.entity.usuario.Usuario;

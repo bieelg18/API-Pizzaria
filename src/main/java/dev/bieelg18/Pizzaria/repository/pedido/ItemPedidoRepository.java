@@ -1,4 +1,4 @@
-package dev.bieelg18.Pizzaria.model.repository.pedido;
+package dev.bieelg18.Pizzaria.repository.pedido;
 
 import dev.bieelg18.Pizzaria.model.entity.pedido.ItemPedido;
 import org.springframework.data.jpa.repository.JpaRepository;

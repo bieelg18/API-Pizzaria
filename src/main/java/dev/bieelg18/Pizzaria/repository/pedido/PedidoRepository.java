@@ -1,4 +1,4 @@
-package dev.bieelg18.Pizzaria.model.repository.pedido;
+package dev.bieelg18.Pizzaria.repository.pedido;
 
 import dev.bieelg18.Pizzaria.model.entity.pedido.Pedido;
 import dev.bieelg18.Pizzaria.model.entity.pedido.StatusPedido;

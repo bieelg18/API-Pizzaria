@@ -1,4 +1,4 @@
-package dev.bieelg18.Pizzaria.model.repository.produto;
+package dev.bieelg18.Pizzaria.repository.produto;
 
 import dev.bieelg18.Pizzaria.model.entity.produto.Produto;
 import dev.bieelg18.Pizzaria.model.entity.produto.TipoProduto;
