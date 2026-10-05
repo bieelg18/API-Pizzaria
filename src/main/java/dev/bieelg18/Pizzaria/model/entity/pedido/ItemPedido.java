@@ -22,14 +22,14 @@ public class ItemPedido {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "idPedido", nullable = false)
+    @JoinColumn(name = "id_pedido", nullable = false)
     private Pedido pedido;
 
     @ManyToOne
-    @JoinColumn(name = "idProduto", nullable = false)
+    @JoinColumn(name = "id_produto", nullable = false)
     private Produto produto;
 
-    @Column(nullable = false)
+    @Column(name = "preco_unitario", nullable = false)
     private BigDecimal precoUnitario;
 
     @Column(nullable = false)

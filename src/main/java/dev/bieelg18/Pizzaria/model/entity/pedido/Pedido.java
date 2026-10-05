@@ -34,6 +34,6 @@ public class Pedido {
     private StatusPedido status;
 
     @ManyToOne
-    @JoinColumn(name = "idCliente", nullable = false)
+    @JoinColumn(name = "id_cliente", nullable = false)
     private Usuario cliente;
 }

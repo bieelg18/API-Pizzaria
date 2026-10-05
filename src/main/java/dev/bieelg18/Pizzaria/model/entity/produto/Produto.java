@@ -26,7 +26,7 @@ public class Produto {
     @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false)
+    @Column(name = "tipo_produto", nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoProduto tipoProduto;
 
