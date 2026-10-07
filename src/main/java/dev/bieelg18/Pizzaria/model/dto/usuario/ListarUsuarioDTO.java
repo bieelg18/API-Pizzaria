@@ -6,6 +6,7 @@ public record ListarUsuarioDTO(
         Integer id,
         String nome,
         String email,
+        String endereco,
         Permissao permissao
 ) {
 }

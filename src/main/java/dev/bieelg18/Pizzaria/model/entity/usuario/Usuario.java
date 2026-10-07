@@ -31,6 +31,9 @@ public class Usuario {
     private String senha;
 
     @Column(nullable = false)
+    private String endereco;
+
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Permissao permissao;
 

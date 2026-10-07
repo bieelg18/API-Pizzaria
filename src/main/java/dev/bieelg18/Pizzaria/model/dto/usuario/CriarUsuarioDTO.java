@@ -6,6 +6,7 @@ public record CriarUsuarioDTO(
         String nome,
         String email,
         String senha,
+        String endereco,
         Permissao permissao
 ) {
 }
