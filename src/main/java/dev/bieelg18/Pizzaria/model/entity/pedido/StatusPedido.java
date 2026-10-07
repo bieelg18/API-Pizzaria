@@ -5,5 +5,6 @@ public enum StatusPedido {
     CONFIRMADO,
     EM_PRODUCAO,
     SAIU_PARA_ENTREGA,
-    CONCLUIDO
+    CONCLUIDO,
+    CANCELADO
 }
