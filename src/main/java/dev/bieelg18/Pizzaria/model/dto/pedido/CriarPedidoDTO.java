@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public record CriarPedidoDTO(
-        List<CriarItemPedidoDTO> itens,
-        Integer idCliente
+        List<CriarItemPedidoDTO> itens
 ) {
 }

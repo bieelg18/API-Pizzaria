@@ -1,5 +1,6 @@
 package dev.bieelg18.Pizzaria.model.entity.usuario;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.bieelg18.Pizzaria.model.entity.pedido.Pedido;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
