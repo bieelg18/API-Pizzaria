@@ -130,4 +130,16 @@ public class UsuarioService {
 
     }
 
+    //Método para buscar um usuário por id
+    public ListarUsuarioDTO buscarId(Integer id){
+
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RecursoNaoEncontradoException(
+                        "Usuário com o ID " + id + " não encontrado"
+                ));
+
+        return listarUsuarioMapper.toDTO(usuario);
+
+    }
+
 }
