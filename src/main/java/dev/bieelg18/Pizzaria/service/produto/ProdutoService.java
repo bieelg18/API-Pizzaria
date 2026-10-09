@@ -10,6 +10,7 @@ import dev.bieelg18.Pizzaria.model.mapper.produto.ListarProdutoMapper;
 import dev.bieelg18.Pizzaria.repository.produto.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class ProdutoService {
     private final ListarProdutoMapper listarProdutoMapper;
 
     //Método para criar um novo produto no banco de dados
+    @Transactional
     public ListarProdutoDTO criarProduto(CriarProdutoDTO criarDTO){
 
         Produto produto = criarProdutoMapper.toEntity(criarDTO);
@@ -32,6 +34,7 @@ public class ProdutoService {
     }
 
     //Método para listar todos os produtos cadastrados
+    @Transactional(readOnly = true)
     public List<ListarProdutoDTO> listarProdutos(){
 
         List<Produto> produtos = produtoRepository.findAll();
@@ -43,6 +46,7 @@ public class ProdutoService {
     }
 
     //Método para editar um produto já cadastrado
+    @Transactional
     public ListarProdutoDTO editarProduto(Integer id, CriarProdutoDTO editarDTO){
 
         Produto produto = produtoRepository.findById(id)
@@ -60,13 +64,12 @@ public class ProdutoService {
             produto.setPreco(editarDTO.preco());
         }
 
-        Produto produtoSalvo = produtoRepository.save(produto);
-
-        return listarProdutoMapper.toDTO(produtoSalvo);
+        return listarProdutoMapper.toDTO(produto);
 
     }
 
     //Método para deletar um produto cadastrado
+    @Transactional
     public void deletarProduto(Integer id){
 
         Produto produto = produtoRepository.findById(id)
@@ -79,6 +82,7 @@ public class ProdutoService {
     }
 
     //Método para listar os produtos pelo tipo do produto
+    @Transactional(readOnly = true)
     public List<ListarProdutoDTO> listarTipos(TipoProduto tipoProduto){
 
         List<Produto> produtos = produtoRepository.findByTipoProduto(tipoProduto);
@@ -90,6 +94,7 @@ public class ProdutoService {
     }
 
     //Método para listar produtos pelo nome
+    @Transactional(readOnly = true)
     public List<ListarProdutoDTO> listarNome(String nome){
 
         List<Produto> produtos = produtoRepository.findByNomeContainingIgnoreCase(nome);

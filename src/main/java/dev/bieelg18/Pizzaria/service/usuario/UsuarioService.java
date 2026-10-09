@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class UsuarioService {
 
 
     //Método para criar um novo usuário
+    @Transactional
     public ListarUsuarioDTO criarUsuario(CriarUsuarioDTO criarDTO){
 
         Usuario usuario = criarUsuarioMapper.toEntity(criarDTO);
@@ -43,6 +45,7 @@ public class UsuarioService {
     }
 
     //Método para listar todos os usuários existentes
+    @Transactional(readOnly = true)
     public List<ListarUsuarioDTO> listarUsuarios(){
 
         List<Usuario> usuarios = usuarioRepository.findAll();
@@ -54,6 +57,7 @@ public class UsuarioService {
     }
 
     //Método para buscar um usuário por e-mail
+    @Transactional(readOnly = true)
     public ListarUsuarioDTO buscarEmail(String email){
 
         Usuario usuario = usuarioRepository.findByEmail(email)
@@ -66,6 +70,7 @@ public class UsuarioService {
     }
 
     //Método para editar dados de cadastro do usuário que chamar a requisição
+    @Transactional
     public ListarUsuarioDTO editarDadosCadastro(EditarUsuarioDTO editarDTO, Authentication authentication){
 
         String email = authentication.getName();
@@ -87,13 +92,12 @@ public class UsuarioService {
             usuario.setEndereco(editarDTO.endereco());
         }
 
-        Usuario usuarioSalvo = usuarioRepository.save(usuario);
-
-        return listarUsuarioMapper.toDTO(usuarioSalvo);
+        return listarUsuarioMapper.toDTO(usuario);
 
     }
 
     //Método para alterar a permissão de um usuário
+    @Transactional
     public ListarUsuarioDTO editarPermissao(Integer id, EditarPermissaoDTO editarPermissaoDTO){
 
         Usuario usuario = usuarioRepository.findById(id)
@@ -102,13 +106,13 @@ public class UsuarioService {
                 ));
 
         usuario.setPermissao(editarPermissaoDTO.permissao());
-        Usuario usuarioSalvo = usuarioRepository.save(usuario);
 
-        return listarUsuarioMapper.toDTO(usuarioSalvo);
+        return listarUsuarioMapper.toDTO(usuario);
 
     }
 
     //Método para deletar um usuário do banco de dados
+    @Transactional
     public void deletarUsuario(Integer id){
 
         Usuario usuario = usuarioRepository.findById(id)
@@ -120,6 +124,7 @@ public class UsuarioService {
     }
 
     //Método para listar usuários pela permissão
+    @Transactional(readOnly = true)
     public List<ListarUsuarioDTO> listarPermissao(Permissao permissao){
 
         List<Usuario> usuarios = usuarioRepository.findByPermissao(permissao);
@@ -131,6 +136,7 @@ public class UsuarioService {
     }
 
     //Método para buscar um usuário por id
+    @Transactional(readOnly = true)
     public ListarUsuarioDTO buscarId(Integer id){
 
         Usuario usuario = usuarioRepository.findById(id)

@@ -20,6 +20,7 @@ import dev.bieelg18.Pizzaria.repository.usuario.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class PedidoService {
     private final ProdutoRepository produtoRepository;
 
     //Método para criar um pedido
+    @Transactional
     public ListarPedidoDTO criarPedido(CriarPedidoDTO criarPedidoDTO, Authentication authentication){
 
         String email = authentication.getName();
@@ -86,6 +88,7 @@ public class PedidoService {
     }
 
     //Método de listar pedidos do usuário que fez a requisição
+    @Transactional(readOnly = true)
     public List<ListarPedidoDTO> listarPedidosUsuario(Authentication authentication){
 
         String email = authentication.getName();
@@ -105,6 +108,7 @@ public class PedidoService {
     }
 
     //Método para listar todos os pedidos existentes
+    @Transactional(readOnly = true)
     public List<ListarPedidoAdminDTO> listarTodosOsPedidos(){
 
         List<Pedido> pedidos = pedidoRepository.findAll();
@@ -116,6 +120,7 @@ public class PedidoService {
     }
 
     //Método para deletar um pedido
+    @Transactional
     public void deletarPedido(Integer id){
 
         Pedido pedido = pedidoRepository.findById(id)
@@ -128,6 +133,7 @@ public class PedidoService {
     }
 
     //Método para cancelar um pedido
+    @Transactional
     public ListarPedidoDTO cancelarPedido(Integer numeroPedido, Authentication authentication){
 
         String email = authentication.getName();
@@ -156,13 +162,12 @@ public class PedidoService {
 
         pedido.setStatus(StatusPedido.CANCELADO);
 
-        Pedido pedidoSalvo = pedidoRepository.save(pedido);
-
-        return listarPedidoMapper.toDTO(pedidoSalvo);
+        return listarPedidoMapper.toDTO(pedido);
 
     }
 
     //Método para listar pedidos por status
+    @Transactional(readOnly = true)
     public List<ListarPedidoDTO> listarStatus(StatusPedido statusPedido){
 
         List<Pedido> pedidos = pedidoRepository.findByStatus(statusPedido);
@@ -174,6 +179,7 @@ public class PedidoService {
     }
 
     //Método para alterar o status de um pedido para confirmado
+    @Transactional
     public ListarPedidoDTO confirmado(Integer id){
 
         Pedido pedido = pedidoRepository.findById(id)
@@ -189,13 +195,12 @@ public class PedidoService {
 
         pedido.setStatus(StatusPedido.CONFIRMADO);
 
-        Pedido pedidoSalvo = pedidoRepository.save(pedido);
-
-        return listarPedidoMapper.toDTO(pedidoSalvo);
+        return listarPedidoMapper.toDTO(pedido);
 
     }
 
     //Método para alterar o status de um pedido para em produção
+    @Transactional
     public ListarPedidoDTO producao(Integer id){
 
         Pedido pedido = pedidoRepository.findById(id)
@@ -211,13 +216,12 @@ public class PedidoService {
 
         pedido.setStatus(StatusPedido.EM_PRODUCAO);
 
-        Pedido pedidoSalvo = pedidoRepository.save(pedido);
-
-        return listarPedidoMapper.toDTO(pedidoSalvo);
+        return listarPedidoMapper.toDTO(pedido);
 
     }
 
     //Método para alterar o status de um pedido para saiu para entrega
+    @Transactional
     public ListarPedidoDTO entrega(Integer id){
 
         Pedido pedido = pedidoRepository.findById(id)
@@ -233,13 +237,12 @@ public class PedidoService {
 
         pedido.setStatus(StatusPedido.SAIU_PARA_ENTREGA);
 
-        Pedido pedidoSalvo = pedidoRepository.save(pedido);
-
-        return listarPedidoMapper.toDTO(pedidoSalvo);
+        return listarPedidoMapper.toDTO(pedido);
 
     }
 
     //Método para alterar o status de um pedido para concluido
+    @Transactional
     public ListarPedidoDTO concluido(Integer id){
 
         Pedido pedido = pedidoRepository.findById(id)
@@ -255,9 +258,7 @@ public class PedidoService {
 
         pedido.setStatus(StatusPedido.CONCLUIDO);
 
-        Pedido pedidoSalvo = pedidoRepository.save(pedido);
-
-        return listarPedidoMapper.toDTO(pedidoSalvo);
+        return listarPedidoMapper.toDTO(pedido);
 
     }
 
